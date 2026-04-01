@@ -360,11 +360,14 @@ function NavItem({
   active?: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center gap-0.5 cursor-pointer group">
-      <img src={icon} alt={label} className="h-[22px] w-auto object-contain" />
+    <div className="flex flex-col items-center gap-[3px] cursor-pointer group">
+      <img src={icon} alt={label} className="h-[24px] w-auto object-contain" />
       <span
-        className={`text-[13px] tracking-inspira whitespace-nowrap transition-colors
-          ${active ? "font-bold text-inspira-nav-on" : "font-medium text-[#919191] group-hover:text-inspira-nav-on"}`}
+        className={`text-[13px] leading-none text-center whitespace-nowrap transition-colors tracking-[0.026em]
+          ${active
+            ? "font-bold text-[#424577]"
+            : "font-medium text-[#919191] group-hover:text-[#424577]"
+          }`}
       >
         {label}
       </span>
@@ -636,18 +639,18 @@ export default function SearchHotelsPage() {
   return (
     <div className="min-h-screen bg-inspira-bg font-poppins">
       {/* ══ HEADER ══════════════════════════════════════════════════════════ */}
-      <header className="sticky top-0 z-50 bg-white shadow-header h-[78px] flex items-center px-8">
-        {/* Logo */}
-        <div className="flex-shrink-0 mr-8">
+      <header className="sticky top-0 z-50 bg-white shadow-header h-[78px] flex items-center px-6">
+        {/* Logo — ~246px wide in 1440px Figma frame */}
+        <div className="flex-shrink-0 w-[200px]">
           <img
             src={ASSETS.logo}
             alt="Inspira"
-            className="h-[29px] w-auto object-contain"
+            className="h-[46px] w-auto object-contain object-left"
           />
         </div>
 
-        {/* Nav Items */}
-        <nav className="flex items-center gap-6 flex-1">
+        {/* Nav Items — evenly spaced across center */}
+        <nav className="flex items-center justify-center gap-7 flex-1">
           <NavItem icon={ASSETS.navHotels} label="Hotels" active />
           <NavItem icon={ASSETS.navResorts} label="Resorts" />
           <NavItem icon={ASSETS.navVacation} label="Vacation Rentals" />
@@ -659,17 +662,18 @@ export default function SearchHotelsPage() {
         </nav>
 
         {/* Right Side */}
-        <div className="flex items-center gap-4 ml-6">
-          {/* Points */}
-          <div className="flex items-center gap-2 bg-white border border-inspira-lines-light rounded-lg px-2 py-1">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <rect x="1" y="5" width="18" height="13" rx="2" stroke="#ea732d" strokeWidth="1.5"/>
-              <path d="M6 5V3a4 4 0 018 0v2" stroke="#ea732d" strokeWidth="1.5"/>
-              <circle cx="10" cy="12" r="2" fill="#ea732d"/>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Inspiration Points counter */}
+          <div className="flex items-center gap-1.5 border border-inspira-lines-light rounded-md px-2 py-1">
+            {/* Wallet/gift icon */}
+            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="6" width="20" height="13" rx="2" stroke="#ea732d" strokeWidth="1.5"/>
+              <path d="M7 6V4a4 4 0 018 0v2" stroke="#ea732d" strokeWidth="1.5"/>
+              <circle cx="11" cy="13" r="2" fill="#ea732d"/>
             </svg>
-            <div>
-              <div className="text-[13px] font-bold text-inspira-points-a leading-none">22,3456</div>
-              <div className="text-[9px] font-semibold text-inspira-points-a tracking-inspira leading-none">
+            <div className="leading-none">
+              <div className="text-[13px] font-bold text-[#ea732d]">22,3456</div>
+              <div className="text-[9px] font-semibold text-[#ea732d] tracking-[0.018em] whitespace-nowrap">
                 Inspiration Points
               </div>
             </div>
@@ -677,18 +681,18 @@ export default function SearchHotelsPage() {
 
           {/* Currency */}
           <div className="flex items-center gap-1 cursor-pointer">
-            <span className="text-[20px]">🇺🇸</span>
-            <span className="text-[13px] font-semibold text-[#919191] tracking-inspira">USD</span>
-            <IconChevronDown color="#919191" />
+            <span className="text-[18px] leading-none">🇺🇸</span>
+            <span className="text-[13px] font-semibold text-[#919191] tracking-[0.026em]">USD</span>
+            <IconChevronDown color="#919191" size={8} />
           </div>
 
-          {/* Avatar */}
-          <div className="flex items-center gap-1 cursor-pointer">
-            <div className="w-[30px] h-[30px] rounded-full bg-inspira-secondary2 flex items-center justify-center text-white text-xs font-bold">
+          {/* Avatar + name */}
+          <div className="flex items-center gap-1.5 cursor-pointer">
+            <div className="w-[30px] h-[30px] rounded-full bg-inspira-secondary2 flex items-center justify-center text-white text-xs font-bold overflow-hidden">
               S
             </div>
-            <span className="text-[13px] font-semibold text-[#919191] tracking-inspira">Somit</span>
-            <IconChevronDown color="#919191" />
+            <span className="text-[13px] font-semibold text-[#919191] tracking-[0.026em]">Somit</span>
+            <IconChevronDown color="#919191" size={8} />
           </div>
         </div>
       </header>
@@ -730,63 +734,78 @@ export default function SearchHotelsPage() {
           </button>
         </div>
 
-        {/* Filter Row */}
-        <div className="flex items-center gap-3 px-8 pb-3">
-          {/* List/Map toggle */}
-          <div className="flex items-center">
+        {/* Filter Row 1 — toggle + pills + hotel name */}
+        <div className="flex items-center gap-3 px-8 pb-2">
+          {/* List/Map toggle — white bg, #c3c3c3 border, active half highlighted */}
+          <div className="flex items-center border border-[#c3c3c3] rounded-[6px] overflow-hidden h-[37px]">
             <button
               onClick={() => setListView(true)}
-              className={`flex items-center justify-center w-[61px] h-[37px] rounded-l-md border transition-colors ${
-                listView
-                  ? "bg-inspira-secondary2 border-inspira-secondary2"
-                  : "bg-white border-inspira-lines-light"
+              className={`flex items-center justify-center w-[61px] h-full transition-colors ${
+                listView ? "bg-[#a4a8c8]" : "bg-white"
               }`}
             >
-              <span className={listView ? "text-white" : "text-inspira-lines"}>
-                <IconList />
-              </span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="0" y="1" width="7" height="7" rx="1" fill={listView ? "white" : "#adadad"}/>
+                <rect x="0" y="12" width="7" height="7" rx="1" fill={listView ? "white" : "#adadad"}/>
+                <rect x="10" y="4" width="10" height="1.5" rx="0.75" fill={listView ? "white" : "#adadad"}/>
+                <rect x="10" y="15" width="10" height="1.5" rx="0.75" fill={listView ? "white" : "#adadad"}/>
+              </svg>
             </button>
+            <div className="w-px h-full bg-[#c3c3c3]" />
             <button
               onClick={() => setListView(false)}
-              className={`flex items-center justify-center w-[55px] h-[37px] rounded-r-md border-t border-r border-b transition-colors ${
-                !listView
-                  ? "bg-inspira-secondary2 border-inspira-secondary2"
-                  : "bg-white border-inspira-lines-light"
+              className={`flex items-center justify-center w-[55px] h-full transition-colors ${
+                !listView ? "bg-[#a4a8c8]" : "bg-white"
               }`}
             >
-              <IconMap />
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M1 4l7-3 7 3 7-3v16l-7 3-7-3-7 3V4z" stroke={!listView ? "white" : "#adadad"} strokeWidth="1.3" strokeLinejoin="round"/>
+                <path d="M8 1v16M15 4v16" stroke={!listView ? "white" : "#adadad"} strokeWidth="1.3"/>
+              </svg>
             </button>
           </div>
 
-          <span className="text-[13px] font-medium text-inspira-subhead tracking-inspira">
+          <span className="text-[13px] font-medium text-inspira-subhead tracking-[0.026em]">
             List View ON
           </span>
 
-          <div className="w-px h-5 bg-inspira-lines-light mx-1" />
+          <div className="w-px h-5 bg-inspira-lines-light" />
 
-          {/* Filter Pills */}
+          {/* Solid filter pills — #a4a8c8 bg, rounded-[6px] */}
           <button className="filter-pill">
-            Price <IconFilter /> <IconChevronDown />
+            Price
+            <svg width="10" height="10" viewBox="0 0 11 11" fill="none"><path d="M1 2h9M3 5.5h5M4.5 9h2" stroke="#465664" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <IconChevronDown size={8} />
           </button>
           <button className="filter-pill">
-            Guest Rating <IconChevronDown />
+            Guest Rating
+            <IconChevronDown size={8} />
           </button>
           <button className="filter-pill">
-            Stars <IconFilter /> <IconChevronDown />
+            Stars
+            <svg width="10" height="10" viewBox="0 0 11 11" fill="none"><path d="M1 2h9M3 5.5h5M4.5 9h2" stroke="#465664" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <IconChevronDown size={8} />
           </button>
-          <button className="filter-pill relative">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M1 2h9M3 5.5h5M4.5 9h2" stroke="#465664" strokeWidth="1.5" strokeLinecap="round"/>
+
+          {/* Hotel Name — input style: #f6f8fa bg, #bfbfbf border, rounded-4px */}
+          <div className="ml-auto filter-input">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 2h9M3 5.5h5M4.5 9h2" stroke="#bfbfbf" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <span className="text-[13px] text-[#bfbfbf] tracking-[0.026em]">Hotel Name</span>
+          </div>
+        </div>
+
+        {/* Filter Row 2 — More Filters (expanded sub-row) */}
+        <div className="flex items-center gap-2 px-8 pb-3">
+          {/* More Filters badge with checkmark icon */}
+          <div className="flex items-center gap-1.5">
+            {/* small checkmark/tick icon (Group 203 in Figma) */}
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none">
+              <path d="M1 6l4 4 7-8" stroke="#424577" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            More Filters(2)
-            <IconChevronDown />
-          </button>
-
-          <div className="ml-auto">
-            <div className="flex items-center gap-2 border border-inspira-lines-light rounded-full px-4 py-1.5 bg-white">
-              <IconSearch color="#adadad" />
-              <span className="text-[13px] text-inspira-lines tracking-inspira">Hotel Name</span>
-            </div>
+            <span className="text-[13px] font-medium text-inspira-subhead tracking-[0.026em]">
+              More Filters(2)
+            </span>
+            <IconChevronDown size={8} />
           </div>
         </div>
       </div>
