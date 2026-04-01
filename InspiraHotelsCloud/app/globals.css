@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Inspira Design Tokens (from Figma variables) ── */
+:root {
+  --subhead-final: #4d4d4d;
+  --boton-filters: #a4a8c8;
+  --lineas-light: #c3c3c3;
+  --primary: #465664;
+  --header-color-final: #333333;
+  --tertiary1: #ff9a7b;
+  --tertiary2: #ffaf57;
+  --secundary1: #686ea3;
+  --secundary2: #424577;
+  --amenities: #08b554;
+  --points-option-a: #ea732d;
+  --points-option-b: #0b81d1;
+  --expiring: #f7665f;
+  --quaternary1: #08b554;
+  --quaternary2: #45e68b;
+  --lines: #adadad;
+  --main-navigation-on: #424577;
+  --color-subhead: #3d3d3d;
+  --background-color: #eef2f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--header-color-final);
+}
+
+@layer components {
+  .filter-pill {
+    @apply flex items-center gap-1 px-3 py-1.5 border border-inspira-lines-light rounded-full text-[13px] font-medium text-inspira-primary tracking-inspira bg-white cursor-pointer hover:bg-gray-50 transition-colors;
+  }
+
+  .filter-pill-active {
+    @apply bg-inspira-secondary2 text-white border-inspira-secondary2;
+  }
+
+  .btn-book {
+    @apply w-full py-2.5 bg-inspira-primary text-white font-semibold text-base rounded-lg hover:bg-opacity-90 transition-colors cursor-pointer;
+  }
+
+  .btn-book-points {
+    @apply w-full py-2 border border-inspira-secondary2 text-inspira-secondary2 font-semibold text-[13px] rounded-lg hover:bg-inspira-secondary2 hover:text-white transition-colors cursor-pointer;
+  }
+}
